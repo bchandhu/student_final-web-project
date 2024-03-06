@@ -1,11 +1,15 @@
 require "./app"
+require "sinatra/activerecord"  # Add this line
 
 configure do
-  # GitHub Pages and Render deployment
-  set(:public_folder, "./")
+  # setup a database connection
+  set(:database, { adapter: "sqlite3", database: "db/development.sqlite3" })
 end
 
 configure :development do
+  # GitHub Pages and Render deployment
+  set(:public_folder, "./")
+
   # we would also like a nicer error page in development
   require "better_errors"
   require "binding_of_caller"
